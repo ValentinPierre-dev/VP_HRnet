@@ -14,7 +14,7 @@ const Header = () => {
           </Link>
         ) : (
           <Link
-            to="/employee-list"
+            to="/employees-list"
             id="path"
             onClick={() => setToggle(!toggle)}
           >

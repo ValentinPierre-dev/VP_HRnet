@@ -6,7 +6,7 @@ import EmployeesList from './pages/EmployeesList';
 
 const App = () => {
   return (
-    <div>
+    <div className='root'>
       <Header />
       <Routes>
         <Route

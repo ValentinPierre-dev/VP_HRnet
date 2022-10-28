@@ -6,8 +6,8 @@ const Header = () => {
 
   return (
     <header>
-      <h1>HR Net</h1>
-      <div>
+      <h1>HRNet</h1>
+      <div className='container'>
         {toggle ? (
           <Link to="/" id="path" onClick={() => setToggle(false)}>
             Home

@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className='container'>
       <div>
-        <span>2022 HRNet | All Rigth Reserved</span>
+        <span>2022 HRNet | All Right Reserved</span>
       </div>
     </footer>
   );

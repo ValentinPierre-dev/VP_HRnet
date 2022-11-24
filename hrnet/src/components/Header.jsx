@@ -10,7 +10,7 @@ const Header = () => {
       <div className='container'>
         {toggle ? (
           <Link to="/" id="path" onClick={() => setToggle(false)}>
-            Home
+            Add a new Employee
           </Link>
         ) : (
           <Link

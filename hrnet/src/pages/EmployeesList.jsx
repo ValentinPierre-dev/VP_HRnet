@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Title from '../components/Title';
+import EnhancedTable from '../components/EnhancedTable';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const EmployeesList = () => {
@@ -11,8 +12,10 @@ const EmployeesList = () => {
       </Helmet>
       <main className="container">
         <section>
-          <Title title="Current Employees" />
-          
+          <div className='table'>
+            <Title title="Current Employees" />
+            <EnhancedTable />
+          </div>
         </section>
       </main>
     </HelmetProvider>

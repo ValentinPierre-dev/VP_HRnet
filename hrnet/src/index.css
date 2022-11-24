@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
 body {
   margin: 0;
@@ -73,16 +73,22 @@ label {
 }
 
 .add-employee {
-  width: 30%;
-  margin: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+  margin: 2rem 3.5rem;
   padding: 3rem 3rem;
   background-color: white;
   font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 }
 
 .add-employee-form {
   display: flex;
   justify-content: space-between;
+  width: 90%;
+  color: #333333;
 }
 
 header {
@@ -90,4 +96,86 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 0 3rem;
+}
+
+.table {
+  background-color: white;
+  margin: 2rem;
+  padding: 2rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #333333;
+  font-size: 1rem;
+  transition: 0.5s;
+}
+
+.add-btn {
+  background-color: #0d6cd0;
+  border: none;
+  padding: 1rem 2rem;
+  color: white;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  opacity: 0.9;
+}
+
+input:focus {
+  border: 2px solid #0d6cd0;
+  outline: none;
+}
+
+
+.modale {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.555);
+}
+.content {
+  display: block;
+  position: relative;
+  top: 35%;
+  left: 0;
+  width: 55%;
+  min-height: 150px;
+  line-height: 150px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+
+}
+.text {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  margin: auto;
+  font-size: 2rem;
+}
+.close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: #0d6cd0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }

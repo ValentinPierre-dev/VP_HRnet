@@ -1,5 +1,11 @@
+// React
 import * as React from 'react';
 import PropTypes from 'prop-types';
+
+// Redux
+import { useSelector } from 'react-redux';
+
+// Components
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,29 +18,6 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(firstname, lastname, startdate, department, birthdate, street, city, state, zipcode) {
-  return {
-    firstname,
-    lastname,
-    startdate,
-    department,
-    birthdate,
-    street,
-    city,
-    state,
-    zipcode
-  };
-}
-
-const rows = [
-  createData('Valentin', 'Pierre', '09/11/2022', 'Sales', '07/12/1991', '21, rue du test', 'DIJON', 'ALASKA', 1234),
-  createData('Jean', 'Dupont', '23/06/2010', 'Marketing', '07/12/1991', '21, rue du test', 'METZ', 'CALIFORNIA', 4651),
-  createData('Michel', 'Resin', '16/12/2016', 'Engineering', '07/12/1991', '21, rue du test', 'STRASBOURG', 'COLORADO', 4942),
-  createData('Luc', 'Fraisier', '12/09/2013', 'Human Ressources', '07/12/1991', '21, rue du test', 'PARIS', 'MICHIGAN', 3567),
-  createData('Sarah', 'Chataîgne', '27/02/2012', 'Legal', '07/12/1991', '21, rue du test', 'LYON', 'NEVADA', 5612),
-  createData('Thomas', 'Lerond', '06/02/2020', 'Sales', '07/12/1991', '21, rue du test', 'BREST', 'GEORGIA', 9754),
-  createData('Natalie', 'Bernard', '11/11/2019', 'Sales', '07/12/1991', '21, rue du test', 'LILLE', 'FLORIDA', 4647),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,19 +51,19 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'firstname',
+    id: 'firstName',
     numeric: false,
     disablePadding: true,
     label: 'First Name',
   },
   {
-    id: 'lastname',
+    id: 'lastName',
     numeric: true,
     disablePadding: false,
     label: 'Last Name',
   },
   {
-    id: 'startdate',
+    id: 'startDate',
     numeric: true,
     disablePadding: false,
     label: 'Start Date',
@@ -92,10 +75,10 @@ const headCells = [
     label: 'Department',
   },
   {
-    id: 'birthdate',
+    id: 'birthDate',
     numeric: true,
     disablePadding: false,
-    label: 'Birthdate',
+    label: 'birthDate',
   },
   {
     id: 'street',
@@ -116,10 +99,10 @@ const headCells = [
     label: 'State',
   },
   {
-    id: 'zipcode',
+    id: 'zipCode',
     numeric: true,
     disablePadding: false,
-    label: 'Zipcode',
+    label: 'zipCode',
   }
 ];
 
@@ -170,6 +153,8 @@ EnhancedTableHead.propTypes = {
 
 
 export default function EnhancedTable() {
+  const listEmployee = useSelector(state => state.listEmployee) 
+  console.log (listEmployee)
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -184,7 +169,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = listEmployee.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -222,7 +207,7 @@ export default function EnhancedTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - listEmployee.length) : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -239,12 +224,12 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={listEmployee.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.sort(getComparator(order, orderBy)).slice() */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(listEmployee, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -252,9 +237,9 @@ export default function EnhancedTable() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.firstname)}
+                      onClick={(event) => handleClick(event, row.firstName)}
                       tabIndex={-1}
-                      key={row.firstname}
+                      key={row.firstName}
                     >
 
                       <TableCell
@@ -263,16 +248,16 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="normal"
                       >
-                        {row.firstname}
+                        {row.firstName}
                       </TableCell>
-                      <TableCell align="left">{row.lastname}</TableCell>
-                      <TableCell align="left">{row.startdate}</TableCell>
+                      <TableCell align="left">{row.lastName}</TableCell>
+                      <TableCell align="left">{row.startDate}</TableCell>
                       <TableCell align="left">{row.department}</TableCell>
-                      <TableCell align="left">{row.birthdate}</TableCell>
+                      <TableCell align="left">{row.birthDate}</TableCell>
                       <TableCell align="left">{row.street}</TableCell>
                       <TableCell align="left">{row.city}</TableCell>
                       <TableCell align="left">{row.state}</TableCell>
-                      <TableCell align="left">{row.zipcode}</TableCell>
+                      <TableCell align="left">{row.zipCode}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -291,7 +276,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={listEmployee.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

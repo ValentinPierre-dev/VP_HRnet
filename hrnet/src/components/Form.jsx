@@ -1,17 +1,29 @@
+// React
 import React, { useState } from 'react';
-import Select from 'react-select';
 
+// Redux
+import { initialState } from '../redux/store/store';
+import { useDispatch } from 'react-redux';
+import { addEmployee } from '../redux/actions/actions';
+
+// Components
+import Select from 'react-select';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Modale from './Modale';
+import { Modal } from 'vp_react_modale';
 import Title from './Title';
 import Button from './Button';
+
+// Datas
 import { departements } from '../datas/departementsList';
 import { usStates } from '../datas/usStates';
 
+
 const Form = () => {
+
+    const dispatch = useDispatch()
 
     const setValue = (args) => {
         const name = args.target ? args.target.name : args.name;
@@ -22,26 +34,18 @@ const Form = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     
-    const [state, setState] = useState({
-        firstName: '',
-        lastName: '',
-        startDate: new Date(),
-        department: '',
-        birthDate: new Date(),
-        street: '',
-        city: '',
-        state: '',
-        zipCode: '',
-      });
+    const [state, setState] = useState(initialState);
 
     const saveEmployee = (e) => {
         e.preventDefault();
+        const startDate = +state.startDate.$D + "/" + +state.startDate.$M + "/" + +state.startDate.$y;
+        const birthDate = +state.birthDate.$D + "/" + +state.birthDate.$M + "/" + +state.birthDate.$y;
         const newState = {
             firstName: state.firstName,
             lastName: state.lastName,
-            startDate: state.startDate,
+            startDate: startDate,
             department: state.department.label,
-            birthDate: state.birthDate,
+            birthDate: birthDate,
             street: state.street,
             city: state.city,
             state: state.state.label,
@@ -67,6 +71,7 @@ const Form = () => {
           alert('Please enter a Zip code');
         } else {
           setState(newState);
+          dispatch(addEmployee(newState))
           setIsOpen(true);
           document.getElementById('add-employee').reset();
           console.log(state)
@@ -169,7 +174,7 @@ const Form = () => {
             </div>
         </div>
         <Button saveEmployee={saveEmployee} />
-        <Modale content={textModal} trigger={isOpen} setTrigger={setIsOpen} />
+        <Modal content={textModal} trigger={isOpen} setTrigger={setIsOpen} />
     </form>
   )
 };

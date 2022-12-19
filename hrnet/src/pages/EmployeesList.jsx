@@ -1,5 +1,7 @@
+// React
 import React from 'react';
 
+// Components
 import Title from '../components/Title';
 import EnhancedTable from '../components/EnhancedTable';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
